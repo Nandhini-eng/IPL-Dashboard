@@ -1,0 +1,23 @@
+[
+  {
+    "date": "2024-05-01",
+    "time": "19:30",
+    "teamA": "Chennai Super Kings",
+    "teamB": "Mumbai Indians",
+    "venue": "MA Chidambaram Stadium, Chennai"
+  },
+  {
+    "date": "2024-05-02",
+    "time": "19:30",
+    "teamA": "Royal Challengers Bangalore",
+    "teamB": "Kolkata Knight Riders",
+    "venue": "M. Chinnaswamy Stadium, Bengaluru"
+  },
+  {
+    "date": "2024-05-03",
+    "time": "19:30",
+    "teamA": "Delhi Capitals",
+    "teamB": "Sunrisers Hyderabad",
+    "venue": "Arun Jaitley Stadium, Delhi"
+  }
+]

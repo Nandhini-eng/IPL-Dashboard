@@ -1,0 +1,26 @@
+[
+  {
+    "team": "Chennai Super Kings",
+    "matches": 10,
+    "wins": 7,
+    "losses": 3,
+    "nrr": 1.234,
+    "points": 14
+  },
+  {
+    "team": "Mumbai Indians",
+    "matches": 10,
+    "wins": 6,
+    "losses": 4,
+    "nrr": 0.876,
+    "points": 12
+  },
+  {
+    "team": "Royal Challengers Bangalore",
+    "matches": 10,
+    "wins": 5,
+    "losses": 5,
+    "nrr": 0.123,
+    "points": 10
+  }
+]
