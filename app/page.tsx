@@ -2,10 +2,14 @@ import MatchBanner from "./components/MatchBanner";
 import PointsTable from "./components/PointsTable";
 import { MatchInfo, TeamStanding } from "./types";
 
+export const revalidate = 60; // ISR: revalidate every 60 seconds
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
 export default async function Home() {
   // Fetch data from the API route with revalidation (ISR)
-  const res = await fetch("http://localhost:3000/api/scrape", {
-    next: { revalidate: 60 },
+  const res = await fetch(`${BASE_URL}/api/scrape`, {
+    next: { revalidate },
   });
   const {
     upcomingMatch,

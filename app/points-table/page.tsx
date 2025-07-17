@@ -1,12 +1,13 @@
 import PointsTable from "../components/PointsTable";
 import type { TeamStanding } from "../types";
-import Link from "next/link";
 import React from "react";
 
-export const revalidate = 60; // ISR: revalidate every 60 seconds
+const revalidate = 60;
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export default async function PointsTablePage() {
-  const res = await fetch("http://localhost:3000/api/scrape", {
+  const res = await fetch(`${BASE_URL}/api/scrape`, {
     next: { revalidate },
   });
   const data = await res.json();
