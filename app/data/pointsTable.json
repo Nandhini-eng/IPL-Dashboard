@@ -1,26 +1,82 @@
 [
   {
-    "team": "Chennai Super Kings",
-    "matches": 10,
-    "wins": 7,
-    "losses": 3,
-    "nrr": 1.234,
-    "points": 14
+    "team": "PBKS",
+    "matches": 14,
+    "wins": 9,
+    "losses": 4,
+    "nrr": 0.372,
+    "points": 19
   },
   {
-    "team": "Mumbai Indians",
-    "matches": 10,
-    "wins": 6,
+    "team": "RCB",
+    "matches": 14,
+    "wins": 9,
     "losses": 4,
-    "nrr": 0.876,
+    "nrr": 0.301,
+    "points": 19
+  },
+  {
+    "team": "GT",
+    "matches": 14,
+    "wins": 9,
+    "losses": 5,
+    "nrr": 0.254,
+    "points": 18
+  },
+  {
+    "team": "MI",
+    "matches": 14,
+    "wins": 8,
+    "losses": 6,
+    "nrr": 1.142,
+    "points": 16
+  },
+  {
+    "team": "DC",
+    "matches": 14,
+    "wins": 7,
+    "losses": 6,
+    "nrr": 0.011,
+    "points": 15
+  },
+  {
+    "team": "SRH",
+    "matches": 14,
+    "wins": 6,
+    "losses": 7,
+    "nrr": -0.241,
+    "points": 13
+  },
+  {
+    "team": "LSG",
+    "matches": 14,
+    "wins": 6,
+    "losses": 8,
+    "nrr": -0.376,
     "points": 12
   },
   {
-    "team": "Royal Challengers Bangalore",
-    "matches": 10,
+    "team": "KKR",
+    "matches": 14,
     "wins": 5,
-    "losses": 5,
-    "nrr": 0.123,
-    "points": 10
+    "losses": 7,
+    "nrr": -0.305,
+    "points": 12
+  },
+  {
+    "team": "RR",
+    "matches": 14,
+    "wins": 4,
+    "losses": 10,
+    "nrr": -0.549,
+    "points": 8
+  },
+  {
+    "team": "CSK",
+    "matches": 14,
+    "wins": 4,
+    "losses": 10,
+    "nrr": -0.647,
+    "points": 8
   }
 ]
