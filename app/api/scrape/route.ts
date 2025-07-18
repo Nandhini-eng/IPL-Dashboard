@@ -5,6 +5,7 @@ import * as cheerio from "cheerio";
 import path from "path";
 import fs from "fs";
 import { MatchInfo, TeamStanding, MatchSchedule } from "../../types";
+import puppeteer from "puppeteer";
 
 const DATA_DIR = path.join(process.cwd(), "app", "data");
 
@@ -24,6 +25,7 @@ async function getFallbackData() {
 }
 
 async function scrapeIplData() {
+  console.log("scraping ipl data func called");
   const url = "https://www.iplt20.com";
   const { data } = await axios.get(url, {
     headers: { "User-Agent": "Mozilla/5.0" },
@@ -51,20 +53,46 @@ async function scrapeIplData() {
   // --- Scrape Points Table ---
   let pointsTable: TeamStanding[] = [];
   try {
-    $("#points-table tbody tr").each((_: number, el: any) => {
-      const tds = $(el).find("td");
+    // Use Puppeteer to get the rendered HTML for the points table
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
+    await page.goto("https://www.iplt20.com/points-table/men", {
+      waitUntil: "networkidle2",
+    });
+
+    // Optional: Dump HTML for debugging
+    const html = await page.content();
+    fs.writeFileSync(path.join(DATA_DIR, "debug_points_table.html"), html);
+
+    // Wait for table rows to appear
+    await page.waitForFunction(
+      () => document.querySelectorAll("#pointtable table tbody tr").length > 0,
+      { timeout: 20000 }
+    );
+
+    const tableHTML = await page.$eval(
+      "#pointtable table",
+      (el) => el.outerHTML
+    );
+    await browser.close();
+
+    // Now parse the table HTML with Cheerio
+    const $$ = cheerio.load(tableHTML);
+    $$("tbody tr").each((_: number, el: any) => {
+      const tds = $$(el).find("td");
       if (tds.length >= 8) {
         pointsTable.push({
-          team: $(tds[1]).text().trim(),
-          matches: parseInt($(tds[2]).text().trim(), 10),
-          wins: parseInt($(tds[3]).text().trim(), 10),
-          losses: parseInt($(tds[5]).text().trim(), 10),
-          nrr: parseFloat($(tds[6]).text().trim()),
-          points: parseInt($(tds[7]).text().trim(), 10),
+          team: $$(tds[1]).text().trim(),
+          matches: parseInt($$(tds[2]).text().trim(), 10),
+          wins: parseInt($$(tds[3]).text().trim(), 10),
+          losses: parseInt($$(tds[5]).text().trim(), 10),
+          nrr: parseFloat($$(tds[6]).text().trim()),
+          points: parseInt($$(tds[7]).text().trim(), 10),
         });
       }
     });
   } catch (e) {
+    console.error("Error scraping points table with Puppeteer:", e);
     pointsTable = [];
   }
 
@@ -91,6 +119,7 @@ async function scrapeIplData() {
 export async function GET() {
   try {
     const scraped = await scrapeIplData();
+    console.log("scraped data resp: ", scraped);
     if (
       !scraped.upcomingMatch ||
       scraped.pointsTable.length === 0 ||
