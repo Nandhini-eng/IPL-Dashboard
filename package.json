@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "scrape:points": "node scripts/scrape-ipl-points-table.js"
   },
   "dependencies": {
     "axios": "^1.10.0",
     "cheerio": "^1.1.0",
     "next": "15.4.1",
+    "puppeteer": "^24.14.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
   },
