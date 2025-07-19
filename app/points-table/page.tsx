@@ -52,8 +52,8 @@ export default async function PointsTablePage() {
   }
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-4 bg-gray-50">
-      <h1 className="text-2xl sm:text-3xl font-bold mt-6 mb-4 text-center w-full">
+    <main className="flex flex-col items-center min-h-screen p-4 bg-gray-50 dark:bg-gray-900">
+      <h1 className="text-2xl sm:text-3xl font-bold mt-6 mb-4 text-center w-full text-gray-900 dark:text-white">
         IPL 2024 Points Table
       </h1>
       <PointsTable teams={teams} />

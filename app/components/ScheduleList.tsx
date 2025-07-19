@@ -31,23 +31,27 @@ const ScheduleList: React.FC<ScheduleListProps> = ({ schedule }) => {
     <div className="w-full max-w-xl mx-auto mt-6">
       {sortedDates.map((date) => (
         <div key={date} className="mb-6">
-          <h3 className="text-base font-semibold text-gray-700 mb-2 px-2">
+          <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2 px-2">
             {formatDate(date)}
           </h3>
           <ul className="flex flex-col gap-3">
             {grouped[date].map((match, idx) => (
               <li
                 key={idx}
-                className="bg-white rounded-lg shadow p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border border-gray-100"
+                className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border border-gray-100 dark:border-gray-700"
               >
                 <div>
-                  <div className="text-sm text-gray-500 mb-1">{match.time}</div>
-                  <div className="text-lg font-bold text-gray-800">
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                    {match.time}
+                  </div>
+                  <div className="text-lg font-bold text-gray-800 dark:text-white">
                     {match.teamA}{" "}
-                    <span className="text-gray-500 font-normal">vs</span>{" "}
+                    <span className="text-gray-500 dark:text-gray-400 font-normal">
+                      vs
+                    </span>{" "}
                     {match.teamB}
                   </div>
-                  <div className="text-sm text-gray-600 mt-1">
+                  <div className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                     {match.venue}
                   </div>
                 </div>
