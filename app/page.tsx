@@ -1,21 +1,69 @@
 import MatchBanner from "./components/MatchBanner";
 import PointsTable from "./components/PointsTable";
 import { MatchInfo, TeamStanding } from "./types";
+import fs from "fs";
+import path from "path";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+// Fallback data function
+async function getFallbackData() {
+  try {
+    const dataDir = path.join(process.cwd(), "app", "data");
+    const [upcoming, pointsTable] = [
+      JSON.parse(fs.readFileSync(path.join(dataDir, "matches.json"), "utf-8")),
+      JSON.parse(
+        fs.readFileSync(path.join(dataDir, "pointsTable.json"), "utf-8")
+      ),
+    ];
+    return {
+      upcomingMatch: upcoming || null,
+      pointsTable: pointsTable || [],
+    };
+  } catch (error) {
+    console.error("Error reading fallback data:", error);
+    return {
+      upcomingMatch: null,
+      pointsTable: [],
+    };
+  }
+}
 
 export default async function Home() {
-  // Fetch data from the API route with revalidation (ISR)
-  const res = await fetch(`${BASE_URL}/api/scrape`, {
-    next: { revalidate },
-  });
-  const {
-    upcomingMatch,
-    pointsTable,
-  }: { upcomingMatch: MatchInfo | null; pointsTable: TeamStanding[] } =
-    await res.json();
+  let upcomingMatch: MatchInfo | null = null;
+  let pointsTable: TeamStanding[] = [];
+
+  try {
+    // Only fetch from API if BASE_URL is properly configured
+    if (BASE_URL && BASE_URL !== "http://localhost:3000") {
+      const res = await fetch(`${BASE_URL}/api/scrape`, {
+        next: { revalidate },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        upcomingMatch = data.upcomingMatch || null;
+        pointsTable = data.pointsTable || [];
+      } else {
+        console.warn("API request failed, using fallback data");
+        const fallback = await getFallbackData();
+        upcomingMatch = fallback.upcomingMatch;
+        pointsTable = fallback.pointsTable;
+      }
+    } else {
+      // Use fallback data during build or when BASE_URL is not set
+      const fallback = await getFallbackData();
+      upcomingMatch = fallback.upcomingMatch;
+      pointsTable = fallback.pointsTable;
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    const fallback = await getFallbackData();
+    upcomingMatch = fallback.upcomingMatch;
+    pointsTable = fallback.pointsTable;
+  }
 
   return (
     <div className="flex flex-col items-center min-h-screen p-8 gap-8 bg-gray-50">
