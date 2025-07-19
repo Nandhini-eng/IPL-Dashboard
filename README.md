@@ -1,36 +1,199 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IPL Dashboard
 
-## Getting Started
+A real-time Indian Premier League (IPL) dashboard built with Next.js that displays live match information, points table, and match schedules. The application scrapes data from official IPL sources to provide up-to-date information.
 
-First, run the development server:
+## Features
+
+- **Live Match Information**: Display upcoming matches with team details and match timing
+- **Points Table**: Real-time IPL standings with team statistics
+- **Match Schedule**: Complete tournament schedule with match details
+- **Responsive Design**: Modern UI built with Tailwind CSS
+- **Auto-refresh**: Data updates automatically every 60 seconds
+- **Web Scraping**: Automated data collection from official IPL sources
+
+## Prerequisites
+
+Before running this project, make sure you have the following installed:
+
+- **Node.js** (version 18 or higher)
+- **npm** or **yarn** package manager
+- **Git** (for cloning the repository)
+
+## Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd ipl-dashboard
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Set up environment variables** (optional)
+   Create a `.env.local` file in the root directory:
+   ```env
+   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+   ```
+
+## Running the Application
+
+### Development Mode
+
+1. **Start the development server**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+2. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the application.
+
+3. **Auto-reload**
+   The application will automatically reload when you make changes to the code.
+
+### Production Build
+
+1. **Build the application**
+
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+
+2. **Start the production server**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+## Data Scraping
+
+The application includes a standalone scraping script for updating the points table data:
+
+### Running the Scraper
 
 ```bash
-npm run dev
+npm run scrape:points
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn scrape:points
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This script will:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Scrape the current IPL points table from the official website
+- Update the `app/data/pointsTable.json` file
+- Display console output with scraping status
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Manual Data Updates
 
-## Learn More
+If you need to update the data manually, you can run the scraper script independently:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+node scripts/scrape-ipl-points-table.js
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+ipl-dashboard/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   └── scrape/        # Data scraping endpoint
+│   ├── components/        # React components
+│   │   ├── MatchBanner.tsx
+│   │   ├── PointsTable.tsx
+│   │   └── ScheduleList.tsx
+│   ├── data/              # Static data files
+│   │   ├── matches.json
+│   │   ├── pointsTable.json
+│   │   └── schedule.json
+│   ├── points-table/      # Points table page
+│   ├── schedule/          # Schedule page
+│   └── types/             # TypeScript type definitions
+├── scripts/               # Utility scripts
+│   └── scrape-ipl-points-table.js
+└── public/                # Static assets
+```
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run scrape:points` - Update points table data
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+
+- **Next.js 15** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Puppeteer** - Web scraping
+- **Cheerio** - HTML parsing
+- **Axios** - HTTP client
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Port 3000 already in use**
+
+   ```bash
+   # Kill the process using port 3000
+   npx kill-port 3000
+   # or change the port
+   npm run dev -- -p 3001
+   ```
+
+2. **Scraping fails**
+
+   - Check your internet connection
+   - The official IPL website might be temporarily unavailable
+   - Try running the scraper script manually: `node scripts/scrape-ipl-points-table.js`
+
+3. **Build errors**
+   ```bash
+   # Clear Next.js cache
+   rm -rf .next
+   npm run build
+   ```
+
+### Data Issues
+
+If the application shows outdated data:
+
+1. Run the scraper: `npm run scrape:points`
+2. Restart the development server
+3. Clear browser cache
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For issues and questions:
+
+- Check the troubleshooting section above
+- Review the project structure and documentation
+- Create an issue in the repository
