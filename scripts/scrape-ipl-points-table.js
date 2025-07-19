@@ -1,3 +1,19 @@
+/**
+ * Standalone IPL Points Table Scraper
+ *
+ * PURPOSE:
+ * - Generate/update fallback data for pointsTable.json
+ * - Test scraping logic independently from the Next.js app
+ * - Debug scraping issues without running the full application
+ *
+ * USAGE:
+ * - Run: node scripts/scrape-ipl-points-table.js
+ * - Output: Updates app/data/pointsTable.json with current IPL standings
+ *
+ * NOTE: This script is for development/maintenance purposes only.
+ * The main application uses the scraping logic in app/api/scrape/route.ts
+ */
+
 const puppeteer = require("puppeteer");
 const cheerio = require("cheerio");
 const fs = require("fs");
