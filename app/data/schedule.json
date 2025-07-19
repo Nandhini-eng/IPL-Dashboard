@@ -1,23 +1,37 @@
 [
   {
-    "date": "2024-05-01",
+    "date": "2025-03-22",
     "time": "19:30",
-    "teamA": "Chennai Super Kings",
-    "teamB": "Mumbai Indians",
-    "venue": "MA Chidambaram Stadium, Chennai"
+    "teamA": "Royal Challengers Bengaluru",
+    "teamB": "Chennai Super Kings",
+    "venue": "Chennai"
   },
   {
-    "date": "2024-05-02",
-    "time": "19:30",
-    "teamA": "Royal Challengers Bangalore",
-    "teamB": "Kolkata Knight Riders",
-    "venue": "M. Chinnaswamy Stadium, Bengaluru"
-  },
-  {
-    "date": "2024-05-03",
-    "time": "19:30",
-    "teamA": "Delhi Capitals",
+    "date": "2025-03-23",
+    "time": "15:30",
+    "teamA": "Rajasthan Royals",
     "teamB": "Sunrisers Hyderabad",
-    "venue": "Arun Jaitley Stadium, Delhi"
+    "venue": "Kolkata"
+  },
+  {
+    "date": "2025-03-23",
+    "time": "19:30",
+    "teamA": "Mumbai Indians",
+    "teamB": "Kolkata Knight Riders",
+    "venue": "Hyderabad"
+  },
+  {
+    "date": "2025-03-24",
+    "time": "19:30",
+    "teamA": "Lucknow Super Giants",
+    "teamB": "Punjab Kings",
+    "venue": "Chennai"
+  },
+  {
+    "date": "2025-03-25",
+    "time": "19:30",
+    "teamA": "Royal Challengers Bengaluru",
+    "teamB": "Gujarat Titans",
+    "venue": "Visakhapatnam"
   }
 ]
